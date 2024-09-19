@@ -14,7 +14,7 @@ public class IniciSessioModel {
     // Método para validar el usuario y la contraseña
     public boolean validarUsuari(String usuari, String contrasenya) {
         // Consulta SQL para validar usuario y contraseña
-        String sql = "SELECT * FROM usuari WHERE username = " + usuari + " AND password  = " + contrasenya;
+        String sql = "SELECT username, password FROM usuari WHERE username = " + usuari + " AND password  = " + contrasenya + "; ";
         Connection conn = Conexio.CrearConexio();
         try {
 
