@@ -17,5 +17,6 @@ public class AppIniciSessio {
 
         // Crear el controlador
         IniciSessioController controlador = new IniciSessioController(vista, model);
+
     }
 }

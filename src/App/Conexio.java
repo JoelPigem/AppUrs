@@ -6,7 +6,7 @@ public class Conexio {
         private static Connection conn = null;
         private static String url = "jdbc:mysql://localhost:3306/db_urs";
         private static String user = "root";
-        private static String password = "123456";
+        private static String password = "admin";
 
         public static Connection CrearConexio(){
             try {
