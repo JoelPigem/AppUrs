@@ -14,7 +14,7 @@ public class IniciSessioView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
        // frame.setBounds(600,400,400,400);
-        frame.setSize(800, 450);
+        frame.setSize(450, 400);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
@@ -25,10 +25,11 @@ public class IniciSessioView {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(44, 62, 80));
+        panel.setBackground(new Color(70, 103, 144));
 
 
-        JLabel labelTitol = new JLabel("Benvingut a la URS, VISCA EL COMUNISME!", JLabel.CENTER);
+
+        JLabel labelTitol = new JLabel("Benvingut a la APP de la URS", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
         labelTitol.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -61,7 +62,7 @@ public class IniciSessioView {
         botoIniciSessio.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(botoIniciSessio);
 
-        frame.add(panel,BorderLayout.NORTH);
+        frame.add(panel,BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
