@@ -66,6 +66,10 @@ public class IniciSessioView {
         frame.setVisible(true);
     }
 
+    public JFrame getFrame() {
+        return frame; //a totes les vistes porfa
+    }
+
     public JTextField getEntradaUsuari() {
         return entradaUsuari;
     }
