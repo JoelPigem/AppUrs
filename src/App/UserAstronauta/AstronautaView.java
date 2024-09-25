@@ -7,9 +7,9 @@ import App.IniciSessio.*;
 
 public class AstronautaView {
     private JFrame frame;
-    private JButton botoEnviar;
-    private JLabel fichaUsuari, labelCoordenades;
-    private JTextField entradaCoordenades;
+    private JButton botoEnviar, botoEnviarMissatge;
+    private JLabel fichaUsuari, labelCoordenades, labelMissatge;
+    private JTextField entradaCoordenades, entradaMissatge;
     private IniciSessioView usuari;
 
     AstronautaView(){
@@ -69,8 +69,30 @@ public class AstronautaView {
         botoEnviar.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(botoEnviar);
 
+        labelMissatge = new JLabel("Enviar Missatge Encriptat:");
+        labelMissatge.setForeground(Color.WHITE);
+        labelMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(labelMissatge);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        entradaMissatge = new JTextField(10);
+        entradaMissatge.setMaximumSize(new Dimension(200, 30));
+        entradaMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(entradaMissatge);
+
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        botoEnviarMissatge = new JButton("Enviar Missatge");
+        botoEnviarMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(botoEnviarMissatge);
+
+
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
+    }
+
+    public JFrame getFrame() {
+        return frame; //a totes les vistes porfa
     }
 
     // Método para actualizar la ficha del usuario
@@ -81,6 +103,15 @@ public class AstronautaView {
     // Obtener las coordenadas introducidas por el usuario
     public String getEntradaCoordenades() {
         return entradaCoordenades.getText();
+    }
+
+    public String getEntradaMissatge() {
+        return entradaMissatge.getText();
+    }
+
+    // Métodos para agregar ActionListener a los botones
+    public void actionListenerBotoEnviarMissatge(ActionListener listener) {
+        botoEnviarMissatge.addActionListener(listener);
     }
 
 

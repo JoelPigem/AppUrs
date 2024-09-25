@@ -1,11 +1,7 @@
-package App.UserAstronauta;
+package App.UserEspia;
 
 
-import App.IniciSessio.IniciSessioController;
-import App.IniciSessio.IniciSessioModel;
-import App.IniciSessio.IniciSessioView;
-
-public class AppAstronauta {
+public class AppEspia {
     public static void main(String[] args) {
         // Asegurarnos de que se recibe el username desde el argumento
         if (args.length == 0) {
@@ -15,12 +11,12 @@ public class AppAstronauta {
         String username = args[0];
 
         // Crear la vista
-        AstronautaView vista = new AstronautaView();
+        EspiaView vista = new EspiaView();
 
         // Crear el modelo
-        AstronautaModel model = new AstronautaModel();
+        EspiaModel model = new EspiaModel();
 
         // Crear el controlador, pasando el username al modelo
-        AstronautaController controlador = new AstronautaController(vista, model, username);
+        EspiaController controlador = new EspiaController(vista, model, username);
     }
 }

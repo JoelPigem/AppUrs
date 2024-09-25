@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import App.UserAdministrador.AppUserAdministrador;
 import App.UserAdministrador.UserAdministradorModel;
 import App.UserAdministrador.UserAdministradorView;
+import App.UserAstronauta.AppAstronauta;
+import App.UserEspia.AppEspia;
 
 public class IniciSessioController {
     private IniciSessioView vista;
@@ -25,20 +27,32 @@ public class IniciSessioController {
             String usuari = vista.getEntradaUsuari().getText();
             String contrasenya = vista.getEntradaContrasenya().getText();
 
-
             try {
-                if (model.validarUsuari(usuari, contrasenya)) {
+                // Obtener el username y rol tras validar
+                String[] result = model.obtenirRol(usuari, contrasenya);
+                if (result != null && model.validarUsuari(usuari, contrasenya)) {
                     JOptionPane.showMessageDialog(null, "Inici de sessió correcte!");
-                    String rol = model.obtenirRol(usuari, contrasenya);
+                    String username = result[0]; // El username
+                    String rol = result[1]; // El rol
                     switch (rol) {
                         case "admin":
                             vista.getFrame().dispose();
                             AppUserAdministrador.main(new String[]{});
                             break;
-                      /*  case "mecanic":
+                        case "astronauta":
                             vista.getFrame().dispose();
-                            new UserMecanicView();
-                            break;*/
+                            // Aquí pasamos el username a AppAstronauta
+                            AppAstronauta.main(new String[]{username}); // Pasamos el username
+                            break;
+                        case "espia":
+                            vista.getFrame().dispose();
+                            // Aquí pasamos el username a AppAstronauta
+                            AppEspia.main(new String[]{username}); // Pasamos el username
+                            break;
+                    /* case "mecanic":
+                        vista.getFrame().dispose();
+                        new UserMecanicView();
+                        break; */
                         default:
                             break;
                     }

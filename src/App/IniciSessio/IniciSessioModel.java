@@ -37,12 +37,10 @@ public class IniciSessioModel {
     }
 
 
-    public String obtenirRol(String usuari, String contrasenya) throws SQLException {
+    public String[] obtenirRol(String usuari, String contrasenya) throws SQLException {
         Connection conn = Conexio.CrearConexio();
         String queryRol = "SELECT username, password, rol FROM usuari WHERE username = ? AND password = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(queryRol);
-
-
 
         preparedStatement.setString(1, usuari);
         preparedStatement.setString(2, contrasenya);
@@ -50,15 +48,14 @@ public class IniciSessioModel {
         ResultSet resultado = preparedStatement.executeQuery();
 
         if (resultado.next()) {
-
             String rol = resultado.getString("rol");
-            System.out.println(rol);
-            return rol;
+            String username = resultado.getString("username");
+            return new String[]{username, rol}; // Retornar tanto el username como el rol
         } else {
-
             return null;
         }
     }
+
 
 
 }
