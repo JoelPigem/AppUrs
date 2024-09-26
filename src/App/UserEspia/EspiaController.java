@@ -5,6 +5,7 @@ import App.IniciSessio.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class EspiaController {
     private EspiaView vista;
@@ -43,7 +44,11 @@ public class EspiaController {
             // Cerrar la ventana actual
             vista.getFrame().dispose();
             // Mostrar la ventana de inicio de sesión
-            AppIniciSessio.main(new String[]{});
+            try {
+                AppIniciSessio.main(new String[]{});
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }
