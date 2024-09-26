@@ -8,11 +8,12 @@ import App.IniciSessio.*;
 public class AstronautaView {
     private JFrame frame;
     private JButton botoEnviar, botoEnviarMissatge;
-    private JLabel fichaUsuari, labelCoordenades, labelMissatge;
+    private JTextArea fichaUsuari; // Cambiado a JTextArea
+    private JLabel labelCoordenades, labelMissatge;
     private JTextField entradaCoordenades, entradaMissatge;
     private IniciSessioView usuari;
 
-    AstronautaView(){
+    AstronautaView() {
         frame = new JFrame("Astronauta");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -20,7 +21,6 @@ public class AstronautaView {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        fichaUsuari = new JLabel();
         labelCoordenades = new JLabel("Enviar Coordenades:");
         entradaCoordenades = new JTextField(10);
         botoEnviar = new JButton("Enviar");
@@ -47,9 +47,21 @@ public class AstronautaView {
         panelFicha.add(etiquetaFicha);
         panelFicha.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        fichaUsuari.setPreferredSize(new Dimension(200, 30));
-        panelFicha.add(fichaUsuari);
+        // Cambiado a JTextArea para mostrar varias líneas
+        fichaUsuari = new JTextArea();
+        fichaUsuari.setEditable(false); // Deshabilitar la edición
+        fichaUsuari.setLineWrap(true); // Ajustar línea
+        fichaUsuari.setWrapStyleWord(true); // Ajustar por palabra
+        fichaUsuari.setPreferredSize(new Dimension(200, 100)); // Preferencia de tamaño
+        fichaUsuari.setBackground(new Color(70, 103, 144)); // Fondo
+        fichaUsuari.setForeground(Color.WHITE); // Color de texto
+        fichaUsuari.setFont(new Font("Arial", Font.PLAIN, 12)); // Fuente
 
+        JPanel panelFichaUsuari = new JPanel();
+        panelFichaUsuari.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alinear al centro
+        panelFichaUsuari.setBackground(new Color(70, 103, 144));
+        panelFichaUsuari.add(fichaUsuari); // Agregar JTextArea al panel centrado
+        panelFicha.add(panelFichaUsuari); // Agregar panelFichaUsuari a panelFicha
 
         panel.add(panelFicha);
         panel.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -86,7 +98,6 @@ public class AstronautaView {
         botoEnviarMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(botoEnviarMissatge);
 
-
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -113,7 +124,6 @@ public class AstronautaView {
     public void actionListenerBotoEnviarMissatge(ActionListener listener) {
         botoEnviarMissatge.addActionListener(listener);
     }
-
 
     // Métodos para agregar ActionListener a los botones
     public void actionListenerBotoEntrar(ActionListener listener) {

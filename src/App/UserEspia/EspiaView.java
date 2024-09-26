@@ -6,86 +6,125 @@ import java.awt.event.ActionListener;
 
 public class EspiaView {
     private JFrame frame;
-    private JButton botoEnviarMissatge;
-    private JLabel fichaUsuari; // Para mostrar los datos del Espía
-    private JTextField entradaMissatge; // Para ingresar el mensaje encriptado
-    private JLabel labelMissatgeEncriptat; // Label para mostrar el mensaje encriptado
+    private JButton botoEnviarMissatge, botoCerrarSesion;
+    private JLabel fichaUsuari, labelMissatge, labelMensajeEncriptado;
+    private JTextField entradaMissatge;
 
-    public EspiaView() {
-        frame = new JFrame("Espía");
+    EspiaView(){
+        frame = new JFrame("Espia");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setSize(450, 300);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        fichaUsuari = new JLabel();
-        entradaMissatge = new JTextField(10);
-        botoEnviarMissatge = new JButton("Enviar Mensaje Encriptado");
-        labelMissatgeEncriptat = new JLabel("Mensaje Encriptado: "); // Label para mostrar el mensaje encriptado
+        // Crear un panel para la parte superior, donde irá el botón de cerrar sesión
+        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setBackground(new Color(70, 103, 144));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(70, 103, 144));
+        botoCerrarSesion = new JButton("Cerrar Sesión");
+        panelSuperior.add(botoCerrarSesion, BorderLayout.WEST); // Ubicamos el botón a la izquierda
 
-        // Título con nombre del usuario
-        JLabel labelTitol = new JLabel("Espía", JLabel.CENTER);
+        // Crear un panel central para centrar los elementos restantes
+        JPanel panelCentral = new JPanel(new GridBagLayout());
+        panelCentral.setBackground(new Color(70, 103, 144));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado entre componentes
+        gbc.anchor = GridBagConstraints.CENTER;  // Centramos los componentes horizontalmente
+
+        // Título con nombre del espía
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; // Hacer que el título ocupe dos columnas
+        JLabel labelTitol = new JLabel("Espia", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
-        labelTitol.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(labelTitol);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        panelCentral.add(labelTitol, gbc);
 
-        // Mostrar los datos del espía
-        panel.add(fichaUsuari);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        // Ficha de usuario - Etiqueta
+        gbc.gridy++;
+        gbc.gridwidth = 1; // Volvemos a 1 columna para el resto de componentes
+        gbc.anchor = GridBagConstraints.EAST; // Alineamos la etiqueta a la derecha
+        JLabel etiquetaFicha = new JLabel("Ficha Usuario:");
+        etiquetaFicha.setForeground(Color.WHITE);
+        panelCentral.add(etiquetaFicha, gbc);
 
-        // Sección de envío de mensajes
-        JLabel labelMissatge = new JLabel("Enviar Mensaje Encriptado:");
+        // Ficha de usuario - Contenido
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST; // Alineamos el contenido a la izquierda
+        fichaUsuari = new JLabel();
+        fichaUsuari.setPreferredSize(new Dimension(200, 30));
+        fichaUsuari.setForeground(Color.WHITE);
+        panelCentral.add(fichaUsuari, gbc);
+
+        // Sección de envío de mensajes - Etiqueta
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.anchor = GridBagConstraints.EAST; // Etiqueta alineada a la derecha
+        labelMissatge = new JLabel("Enviar Missatge:");
         labelMissatge.setForeground(Color.WHITE);
-        labelMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(labelMissatge);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentral.add(labelMissatge, gbc);
 
+        // Sección de envío de mensajes - Entrada de texto y botón en la misma fila
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST; // Alineamos la entrada a la izquierda
+
+        // Crear un panel para agrupar el campo de texto y el botón
+        JPanel panelMensajeYBoton = new JPanel();
+        panelMensajeYBoton.setBackground(new Color(70, 103, 144)); // Establecer el color de fondo igual al del panelCentral
+        panelMensajeYBoton.setLayout(new BoxLayout(panelMensajeYBoton, BoxLayout.LINE_AXIS)); // Poner los componentes en línea
+
+        entradaMissatge = new JTextField(10);
         entradaMissatge.setMaximumSize(new Dimension(200, 30));
-        entradaMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(entradaMissatge);
+        panelMensajeYBoton.add(entradaMissatge); // Añadir el campo de texto al panel
 
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        botoEnviarMissatge = new JButton("Enviar Missatge");
+        panelMensajeYBoton.add(Box.createRigidArea(new Dimension(5, 0))); // Espacio mínimo entre el campo de texto y el botón
+        panelMensajeYBoton.add(botoEnviarMissatge); // Añadir el botón al panel
 
-        botoEnviarMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(botoEnviarMissatge);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentral.add(panelMensajeYBoton, gbc); // Añadir el panel al layout
 
-        // Añadir label para mostrar mensaje encriptado
-        panel.add(labelMissatgeEncriptat);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        // Mostrar mensaje encriptado
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2; // Hacemos que ocupe dos columnas
+        gbc.anchor = GridBagConstraints.CENTER; // Lo centramos
+        labelMensajeEncriptado = new JLabel();
+        labelMensajeEncriptado.setForeground(Color.WHITE);
+        panelCentral.add(labelMensajeEncriptado, gbc);
 
-        frame.add(panel, BorderLayout.CENTER);
+        // Añadir los paneles a la ventana principal
+        frame.add(panelSuperior, BorderLayout.NORTH); // El botón de cerrar sesión en la parte superior
+        frame.add(panelCentral, BorderLayout.CENTER); // El contenido centrado
         frame.setVisible(true);
     }
 
     public JFrame getFrame() {
-        return frame; //a totes les vistes porfa
+        return frame; // A todas las vistas porfa
     }
 
     // Método para actualizar la ficha del usuario
     public void actualitzarFitxa(String ficha) {
-        fichaUsuari.setText("Datos del Espía: " + ficha); // Mostrar datos del Espía
+        fichaUsuari.setText("<html>" + ficha.replaceAll(", ", "<br>") + "</html>"); // Mejor formato con salto de línea
     }
 
-    // Obtener el mensaje ingresado por el usuario
+    // Obtener el mensaje introducido por el espía
     public String getEntradaMissatge() {
         return entradaMissatge.getText();
     }
 
-    // Actualizar el mensaje encriptado
-    public void setMensajeEncriptado(String mensaje) {
-        labelMissatgeEncriptat.setText("Mensaje Encriptado: " + mensaje);
+    // Mostrar el mensaje encriptado
+    public void setMensajeEncriptado(String missatgeEncriptat) {
+        labelMensajeEncriptado.setText("Mensaje Encriptado: " + missatgeEncriptat);
     }
 
-    // Métodos para agregar ActionListener a los botones
+    // Listener para el botón de enviar mensaje
     public void actionListenerBotoEnviarMensatge(ActionListener listener) {
         botoEnviarMissatge.addActionListener(listener);
+    }
+
+    // Listener para el botón de cerrar sesión
+    public void actionListenerBotoCerrarSesion(ActionListener listener) {
+        botoCerrarSesion.addActionListener(listener);
     }
 }

@@ -30,13 +30,20 @@ public class AstronautaModel {
                 String rangoMilitar = rs.getString("RANG_MILITAR");
 
                 // Formateamos el resultado para mostrarlo en la vista
-                resultado.append("Nom: ").append(nombre).append("\n");
-                resultado.append("Edat: ").append(edad).append("\n");
-                resultado.append("Data Vol: ").append(fechaVuelo).append("\n");
-                resultado.append("Missió OK: ").append(missionOk).append("\n");
-                resultado.append("Sexe: ").append(sexo).append("\n");
-                resultado.append("Adreça: ").append(direccion).append("\n");
-                resultado.append("Rang Militar: ").append(rangoMilitar).append("\n");
+                resultado.append("<html>"); // Iniciar HTML para permitir el formato
+                resultado.append("<span style='color:white;'>"); // Establecer el color blanco
+
+                // Añadir cada campo con saltos de línea
+                resultado.append("Nom: ").append(nombre).append("<br>"); // Saltos de línea con <br>
+                resultado.append("Edat: ").append(edad).append("<br>");
+                resultado.append("Data Vol: ").append(fechaVuelo).append("<br>");
+                resultado.append("Missió OK: ").append(missionOk).append("<br>");
+                resultado.append("Sexe: ").append(sexo).append("<br>");
+                resultado.append("Adreça: ").append(direccion).append("<br>");
+                resultado.append("Rang Militar: ").append(rangoMilitar).append("<br>");
+
+                resultado.append("</span>"); // Cerrar el span
+                resultado.append("</html>"); // Cerrar el HTML
             }
 
             rs.close();
@@ -101,6 +108,7 @@ public class AstronautaModel {
             e.printStackTrace();
         }
     }
+
     public void insertarMissatgeEncriptat(String username, String missatge) {
         String missatgeEncriptat = eliminarVocals(missatge);
         try {
@@ -114,7 +122,7 @@ public class AstronautaModel {
                 int idUser = rsId.getInt("ID_USER");
 
                 // Insertar mensaje en la tabla MISSATGES_ENCRIPTATS
-                String insertQuery = "INSERT INTO MISSATGES_ENCRIPTATS_ASTRONAUTES (ID_ASTRONAUTA, MISSATGE_ENCRIPTAT, DATA_ENVIAMENT) VALUES (?, ?, NOW())";
+                String insertQuery = "INSERT INTO msg_encr_astronauta (ID_ASTRONAUTA, MISSATGE_ENCRIPTAT, DATA_ENVIAMENT) VALUES (?, ?, NOW())";
                 PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
                 insertStmt.setInt(1, idUser);
                 insertStmt.setString(2, missatgeEncriptat);

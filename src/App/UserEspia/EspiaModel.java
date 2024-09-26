@@ -14,14 +14,15 @@ public class EspiaModel {
     public String obtenerFichaUsuario(String username) {
         StringBuilder ficha = new StringBuilder();
         try {
-            String query = "SELECT * FROM USUARI WHERE username = ?";
+            String query = "SELECT NOM_CLAU, TELF" +
+                    " FROM ESPIA JOIN usuari ON usuari.ID_USER = espia.ID_USER WHERE usuari.username = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                ficha.append("Username: ").append(rs.getString("username")).append(", ");
-                ficha.append("Rol: ").append(rs.getString("rol")).append(", ");
+                ficha.append("Nom clau: ").append(rs.getString("nom_clau")).append(", ");
+                ficha.append("Teléfon: ").append(rs.getString("telf")).append(", ");
                 // Añadir más campos según la tabla USUARI
             }
             rs.close();
@@ -46,7 +47,7 @@ public class EspiaModel {
                 int idEspia = rsId.getInt("ID_USER");
 
                 // Insertar mensaje en la tabla MISSATGES_ENCRIPTATS
-                String insertQuery = "INSERT INTO MISSATGES_ENCRIPTATS_ESPIES (ID_ESPIA, MISSATGE_ENCRIPTAT, DATA_ENVIAMENT) VALUES (?, ?, NOW())";
+                String insertQuery = "INSERT INTO msg_encr_espies (ID_ESPIA, MISSATGE_ENCRIPTAT, DATA_ENVIAMENT) VALUES (?, ?, NOW())";
                 PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
                 insertStmt.setInt(1, idEspia);
                 insertStmt.setString(2, missatgeEncriptat);
