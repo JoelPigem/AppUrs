@@ -9,7 +9,7 @@ public class IniciSessioView {
     private JButton botoIniciSessio;
     private JTextField entradaUsuari, entradaContrasenya;
 
-    IniciSessioView(){
+    public IniciSessioView(){
         frame = new JFrame("Inici Sessio");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
