@@ -56,4 +56,13 @@ public class UserAdministradorModel {
         }
         return list.toArray(new Object[0][]);
     }
+
+    public boolean eliminarUsuari(int ID) throws SQLException {
+        String eliminarUsuari = "DELETE FROM usuari WHERE id_user = ?";
+        PreparedStatement preparedStatement = conn.prepareStatement(eliminarUsuari);
+        preparedStatement.setInt(1, ID);
+
+        int rowsAffected = preparedStatement.executeUpdate();
+        return rowsAffected > 0;
+    }
 }

@@ -66,9 +66,9 @@ public class UserAdministradorView {
 
         panelDreta.add(botoModificar);
         panelDreta.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelDreta.add(botoBorrar);
-        panelDreta.add(Box.createRigidArea(new Dimension(0, 10)));
         panelDreta.add(botoAfegir);
+        panelDreta.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelDreta.add(botoBorrar);
 
 
         JPanel panelEsquerra = new JPanel();
@@ -98,6 +98,9 @@ public class UserAdministradorView {
 
     }
 
+    public JButton getBotoAfegir(){ return botoAfegir; }
+    public JButton getBotoModificar(){ return botoModificar; }
+
     public JTextField getBuscarUsuari(){
         return buscarUsuari;
     }
@@ -105,6 +108,16 @@ public class UserAdministradorView {
         return botoLlistar;
     }
 
+    public JButton getBotoBorrar() {
+        return botoBorrar;
+    }
+
+    public void clearBuscarUsuari() {
+        buscarUsuari.setText("");
+    }
+    public JFrame getFrame() {
+        return frame;
+    }
     public JComboBox<String> getDesplegableRol() {
         return desplegableRol;
     }

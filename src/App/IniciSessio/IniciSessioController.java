@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+
+import App.Mecanic.AppUserMecanic;
 import App.UserAdministrador.AppUserAdministrador;
 import App.UserAdministrador.UserAdministradorModel;
 import App.UserAdministrador.UserAdministradorView;
@@ -41,18 +43,16 @@ public class IniciSessioController {
                             break;
                         case "astronauta":
                             vista.getFrame().dispose();
-                            // Aquí pasamos el username a AppAstronauta
-                            AppAstronauta.main(new String[]{username}); // Pasamos el username
+                            AppAstronauta.main(new String[]{username});
                             break;
                         case "espia":
                             vista.getFrame().dispose();
-                            // Aquí pasamos el username a AppAstronauta
-                            AppEspia.main(new String[]{username}); // Pasamos el username
+                            AppEspia.main(new String[]{username});
                             break;
-                    /* case "mecanic":
+                     case "mecanic":
                         vista.getFrame().dispose();
-                        new UserMecanicView();
-                        break; */
+                        AppUserMecanic.main(new String[]{username});
+                        break;
                         default:
                             break;
                     }

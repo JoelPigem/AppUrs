@@ -67,7 +67,7 @@ public class IniciSessioView {
     }
 
     public JFrame getFrame() {
-        return frame; //a totes les vistes porfa
+        return frame;
     }
 
     public JTextField getEntradaUsuari() {
