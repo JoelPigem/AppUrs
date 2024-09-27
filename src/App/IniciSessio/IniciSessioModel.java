@@ -50,7 +50,8 @@ public class IniciSessioModel {
         if (resultado.next()) {
             String rol = resultado.getString("rol");
             String username = resultado.getString("username");
-            return new String[]{username, rol}; // Retornar tanto el username como el rol
+            String password = resultado.getString("password");
+            return new String[]{username, rol, password}; // Retornar tanto el username como el rol
         } else {
             return null;
         }

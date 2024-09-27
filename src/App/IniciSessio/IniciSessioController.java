@@ -43,15 +43,15 @@ public class IniciSessioController {
                             break;
                         case "astronauta":
                             vista.getFrame().dispose();
-                            AppAstronauta.main(new String[]{username});
+                            AppAstronauta.main(new String[]{username, contrasenya});
                             break;
                         case "espia":
                             vista.getFrame().dispose();
-                            AppEspia.main(new String[]{username});
+                            AppEspia.main(new String[]{username, contrasenya});
                             break;
                      case "mecanic":
                         vista.getFrame().dispose();
-                        AppUserMecanic.main(new String[]{username});
+                        AppUserMecanic.main(new String[]{username, contrasenya});
                         break;
                         default:
                             break;

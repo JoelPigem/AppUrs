@@ -17,12 +17,6 @@ public class AppIniciSessio {
 
         IniciSessioController controlador = new IniciSessioController(vista, model);
 
-        String usuari = vista.getEntradaUsuari().getText();
-        String contrasenya = vista.getEntradaContrasenya().getText();
-
-        //if (model.validarUsuari(usuari, contrasenya)){
-            MecanicView mecanicView = new MecanicView();
-        //}
 
 
         //MecanicView mecanicView = new MecanicView();

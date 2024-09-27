@@ -55,7 +55,7 @@ public class MecanicModel {
     }
 
     public void fitxarEntrada(int id) throws SQLException {
-        String sql = "update table usuari set fitxar = true where id_user = ?";
+        String sql = "update usuari set fitxar = true where id_user = ?";
         Connection con = Conexio.CrearConexio();
 
         PreparedStatement ps = con.prepareStatement(sql);
@@ -65,15 +65,36 @@ public class MecanicModel {
         ps.executeUpdate();
     }
 
+    public void fitxarSortida(int id) throws SQLException {
+        String sql = "update usuari set fitxar = false where id_user = ?";
+        Connection con = Conexio.CrearConexio();
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, id);
+
+        ps.executeUpdate();
+    }
+
+
     public int obtenirID(String username, String password) throws SQLException {
+
+        String sql = "select ID_USER from usuari where username = ? and password = ?";
         Connection conn = Conexio.CrearConexio();
-        String sql = "select ID from usuario where username = ? and password = ?";
+
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, username);
         ps.setString(2, password);
+
         ResultSet rs = ps.executeQuery();
 
-        return rs.getInt("ID");
+        int a = 0;
+
+        while(rs.next()){
+            a = rs.getInt("ID_USER");
+        }
+
+        return a;
     }
 
 

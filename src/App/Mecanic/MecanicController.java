@@ -12,17 +12,21 @@ public class MecanicController {
 
     private MecanicView vista;
     private MecanicModel model;
-    private IniciSessioModel iniciSessioModel;
-    private IniciSessioView iniciSessioView;
+    private String username;
+    private String password;
 
-    public MecanicController(MecanicView vista, MecanicModel model) {
+    public MecanicController(MecanicView vista, MecanicModel model, String username, String password) {
         this.vista = vista;
         this.model = model;
+        this.username = username;
+        this.password = password;
+
         //this.iniciSessioModel = new IniciSessioModel();
         //this.iniciSessioView = new IniciSessioView();
         this.vista.actionListenerLlistar(new ListenerLlistar());
         this.vista.actionListenerImprimir(new actionListenerImprimir());
         this.vista.actionListenerFitxarEntrada(new actionListenerFitxarEntrada());
+        this.vista.actionListenerFitxarSortida(new actionListenerFitxarSortida());
 
     }
 
@@ -54,9 +58,25 @@ public class MecanicController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             try {
-                model.fitxarEntrada(model.obtenirID(iniciSessioView.getEntradaUsuari().getText(), iniciSessioView.getEntradaContrasenya().getText()));
+                model.fitxarEntrada(model.obtenirID(username, password));
                 System.out.println("fitxat correctament");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+    }
+
+    class actionListenerFitxarSortida implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                model.fitxarSortida(model.obtenirID(username, password));
+                System.out.println("fitxat sortida correctament");
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }

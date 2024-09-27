@@ -11,6 +11,7 @@ public class AppUserMecanic {
             return;
         }
         String username = args[0];
+        String password = args[1];
         // Crear la vista
         MecanicView view = new MecanicView();
 
@@ -18,7 +19,7 @@ public class AppUserMecanic {
         MecanicModel model = new MecanicModel();
 
         // Crear el controlador
-        MecanicController controller = new MecanicController(view, model);
+        MecanicController controller = new MecanicController(view, model, username, password);
 
     }
 }
