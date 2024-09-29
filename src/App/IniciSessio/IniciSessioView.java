@@ -26,7 +26,7 @@ public class IniciSessioView {
         entradaContrasenya = new JPasswordField(10);
         botoIniciSessio = new JButton("Entrar");
 
-        JLabel labelTitol = new JLabel("Benvingut a la APP de la URS", JLabel.CENTER);
+        JLabel labelTitol = new JLabel("Benvingut a la URSS", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
         labelTitol.setAlignmentX(Component.CENTER_ALIGNMENT);
