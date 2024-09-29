@@ -120,7 +120,7 @@ public class MecanicModel {
                 ficha.append("Any Exp: ").append(rs.getString("anys_exp")).append(", ");
                 ficha.append("Ciutat: ").append(rs.getString("ciutat")).append(", ");
                 ficha.append("Sexe: ").append(rs.getString("sexe")).append(", ");
-                // Añadir más campos según la tabla USUARI
+
             }
             rs.close();
             stmt.close();
