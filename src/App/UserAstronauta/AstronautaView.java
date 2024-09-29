@@ -43,7 +43,7 @@ public class AstronautaView {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
-        JLabel etiquetaFicha = new JLabel("Ficha:");
+        JLabel etiquetaFicha = new JLabel("Fitxa:");
         etiquetaFicha.setForeground(Color.WHITE);
         panelCentral.add(etiquetaFicha, gbc);
 

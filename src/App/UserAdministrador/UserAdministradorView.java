@@ -2,11 +2,12 @@ package App.UserAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class UserAdministradorView {
     private JFrame frame;
-    private JButton botoModificar, botoBorrar, botoAfegir, botoLlistar;
+    private JButton botoModificar, botoBorrar, botoAfegir, botoLlistar, botoTancarSessio ;
     private JTextField buscarUsuari;
     private JComboBox<String> desplegableRol;
     private JLabel labelRolUsuari;
@@ -21,12 +22,12 @@ public class UserAdministradorView {
         frame.setSize(650, 650);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.getContentPane().setBackground(new Color(70, 103, 144));
+        frame.getContentPane().setBackground(new Color(213, 21, 21));
 
 
         JPanel panelTop = new JPanel();
         panelTop.setLayout(new BoxLayout(panelTop, BoxLayout.Y_AXIS));
-        panelTop.setBackground(new Color(70, 103, 144));
+        panelTop.setBackground(new Color(213, 21, 21));
 
         labelRolUsuari = new JLabel("Administrador");
         labelRolUsuari.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -45,23 +46,25 @@ public class UserAdministradorView {
         buscarUsuari.setMaximumSize(new Dimension(200, 30));
 
         JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.setBackground(new Color(70, 103, 144));
+        panelSuperior.setBackground(new Color(213, 21, 21));
         panelSuperior.add(panelTop, BorderLayout.CENTER);
         panelSuperior.add(buscarUsuari, BorderLayout.LINE_END);
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
 
         JPanel panelDreta = new JPanel();
         panelDreta.setLayout(new BoxLayout(panelDreta, BoxLayout.Y_AXIS));
-        panelDreta.setBackground(new Color(70, 103, 144));
+        panelDreta.setBackground(new Color(213, 21, 21));
         panelDreta.setBorder(BorderFactory.createEmptyBorder(150, 0, 20, 30));
 
         botoModificar = new JButton("Modificar");
         botoBorrar = new JButton("Borrar");
         botoAfegir = new JButton("Afegir");
+        botoTancarSessio = new JButton("Tancar Sessió");
 
         botoModificar.setMaximumSize(new Dimension(200, 30));
         botoBorrar.setMaximumSize(new Dimension(200, 30));
         botoAfegir.setMaximumSize(new Dimension(200, 30));
+        botoTancarSessio.setMaximumSize(new Dimension(200,30));
 
 
         panelDreta.add(botoModificar);
@@ -69,11 +72,13 @@ public class UserAdministradorView {
         panelDreta.add(botoAfegir);
         panelDreta.add(Box.createRigidArea(new Dimension(0, 10)));
         panelDreta.add(botoBorrar);
+        panelDreta.add(Box.createRigidArea(new Dimension(0,10)));
+        panelDreta.add(botoTancarSessio);
 
 
         JPanel panelEsquerra = new JPanel();
         panelEsquerra.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 20));
-        panelEsquerra.setBackground(new Color(70, 103, 144));
+        panelEsquerra.setBackground(new Color(213, 21, 21));
         panelEsquerra.add(Box.createRigidArea(new Dimension(0, 10)));
 
         botoLlistar = new JButton("Llistar");
@@ -100,6 +105,11 @@ public class UserAdministradorView {
 
     public JButton getBotoAfegir(){ return botoAfegir; }
     public JButton getBotoModificar(){ return botoModificar; }
+
+
+    public JButton getBotoTancarSessio() {
+        return botoTancarSessio;
+    }
 
     public JTextField getBuscarUsuari(){
         return buscarUsuari;

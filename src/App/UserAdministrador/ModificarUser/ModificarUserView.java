@@ -9,50 +9,63 @@ public class ModificarUserView {
     private JPasswordField passwordField;
     private JComboBox<String> rolComboBox;
     private JButton botoModificar, botoEnrere, botoBuscar;
-    ModificarUserView(){
-        frame = new JFrame("Afegir Usuari");
+
+    public ModificarUserView() {
+
+        frame = new JFrame("Modificar Usuari");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 350);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
-        frame.setBackground(new Color(70, 103, 144));
+
+
+        frame.getContentPane().setBackground(new Color(213, 21, 21));
+
 
         JPanel panelSuperior = new JPanel();
         panelSuperior.setLayout(new BoxLayout(panelSuperior, BoxLayout.Y_AXIS));
-        panelSuperior.setBackground(new Color(70, 103, 144));
+        panelSuperior.setBackground(new Color(213, 21, 21));
+
+
 
         JPanel panelEnrere = new JPanel(new FlowLayout(FlowLayout.LEFT));
         botoEnrere = new JButton("<");
+        botoEnrere.setForeground(Color.WHITE);
+        botoEnrere.setBackground(new Color(100, 15, 15));
         panelEnrere.add(botoEnrere);
-        panelEnrere.setBackground(new Color(70, 103, 144));
-
-        JPanel panelBuscar = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-
+        panelEnrere.setBackground(new Color(213, 21, 21));
         panelSuperior.add(panelEnrere);
+
 
         JPanel panelCentral = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
-        panelCentral.setBackground(new Color(70, 103, 144));
+        panelCentral.setBackground(new Color(213, 21, 21));
+
 
         JLabel idLabel = new JLabel("ID del Usuari:");
+        idLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 0;
+        panelCentral.add(idLabel, constraints);
 
-        panelCentral.add(idLabel);
         idField = new JTextField(10);
         constraints.gridx = 1;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_START;
-        panelCentral.add(idField,constraints);
+        panelCentral.add(idField, constraints);
+
 
         botoBuscar = new JButton("Buscar");
+        botoBuscar.setForeground(Color.WHITE);
+        botoBuscar.setBackground(new Color(100, 15, 15));
         constraints.gridx = 2;
         constraints.gridy = 0;
         panelCentral.add(botoBuscar, constraints);
 
+
         JLabel usernameLabel = new JLabel("Nom:");
+        usernameLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -64,7 +77,9 @@ public class ModificarUserView {
         constraints.anchor = GridBagConstraints.LINE_START;
         panelCentral.add(nomField, constraints);
 
-        JLabel passwordLabel = new JLabel("Contrassenya:");
+
+        JLabel passwordLabel = new JLabel("Contrasenya:");
+        passwordLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -76,7 +91,9 @@ public class ModificarUserView {
         constraints.anchor = GridBagConstraints.LINE_START;
         panelCentral.add(passwordField, constraints);
 
+
         JLabel roleLabel = new JLabel("Rol:");
+        roleLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -88,15 +105,20 @@ public class ModificarUserView {
         constraints.anchor = GridBagConstraints.LINE_START;
         panelCentral.add(rolComboBox, constraints);
 
+
         JPanel botoPanell = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botoModificar = new JButton("Modificar Usuari");
+        botoModificar.setForeground(Color.WHITE);
+        botoModificar.setBackground(new Color(100, 15, 15)); // Un rojo más oscuro
         botoModificar.setEnabled(false);
         botoPanell.add(botoModificar);
-        botoPanell.setBackground(new Color(70, 103, 144));
+        botoPanell.setBackground(new Color(213, 21, 21));
+
 
         frame.add(panelSuperior, BorderLayout.NORTH);
         frame.add(panelCentral, BorderLayout.CENTER);
         frame.add(botoPanell, BorderLayout.SOUTH);
+
 
         frame.setVisible(true);
     }
@@ -149,9 +171,8 @@ public class ModificarUserView {
         return frame;
     }
 
-
-
     public void netejarTexts() {
+        idField.setText("");
         nomField.setText("");
         passwordField.setText("");
         rolComboBox.setSelectedIndex(0);

@@ -19,7 +19,6 @@ public class AppIniciSessio {
 
 
 
-        //MecanicView mecanicView = new MecanicView();
 
     }
 }

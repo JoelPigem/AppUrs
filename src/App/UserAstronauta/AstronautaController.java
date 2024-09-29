@@ -60,9 +60,8 @@ public class AstronautaController {
     }
     class BotonCerrarSesionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // Cerrar la ventana actual
+
             vista.getFrame().dispose();
-            // Mostrar la ventana de inicio de sesión
             try {
                 AppIniciSessio.main(new String[]{});
             } catch (SQLException ex) {

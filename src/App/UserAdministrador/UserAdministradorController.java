@@ -1,9 +1,11 @@
 package App.UserAdministrador;
 
+import App.IniciSessio.AppIniciSessio;
 import App.IniciSessio.IniciSessioModel;
 import App.IniciSessio.IniciSessioView;
 import App.UserAdministrador.AfegirUser.AppAfegirUser;
 import App.UserAdministrador.ModificarUser.AppModificarUser;
+import App.UserAstronauta.AstronautaController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,18 @@ public class UserAdministradorController {
         this.model = model;
 
         this.vista.getBotoLlistar().addActionListener(new ListenerLlistarUsuari());
+        vista.getBotoTancarSessio().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vista.getFrame().dispose();
+                try {
+                    AppIniciSessio.main(new String[]{});
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+                                                      });
+
         vista.getBotoAfegir().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

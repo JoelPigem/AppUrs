@@ -19,50 +19,47 @@ public class IniciSessioView {
         frame.setResizable(false);
 
 
+        BackgroundPanel backgroundPanel = new BackgroundPanel();
+        backgroundPanel.setLayout(new BoxLayout(backgroundPanel, BoxLayout.Y_AXIS));
+
         entradaUsuari = new JTextField(10);
         entradaContrasenya = new JPasswordField(10);
         botoIniciSessio = new JButton("Entrar");
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(70, 103, 144));
-
-
 
         JLabel labelTitol = new JLabel("Benvingut a la APP de la URS", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
         labelTitol.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(labelTitol);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        backgroundPanel.add(labelTitol);
+        backgroundPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 
 
         JLabel etiquetaUsuari = new JLabel("Usuari:");
         etiquetaUsuari.setForeground(Color.WHITE);
         etiquetaUsuari.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(etiquetaUsuari);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        backgroundPanel.add(etiquetaUsuari);
+        backgroundPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         entradaUsuari.setMaximumSize(new Dimension(200, 30));
         entradaUsuari.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(entradaUsuari);
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        backgroundPanel.add(entradaUsuari);
+        backgroundPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
 
         JLabel etiquetaContrasenya = new JLabel("Contrasenya:");
         etiquetaContrasenya.setForeground(Color.WHITE);
         etiquetaContrasenya.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(etiquetaContrasenya);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        backgroundPanel.add(etiquetaContrasenya);
+        backgroundPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         entradaContrasenya.setMaximumSize(new Dimension(200, 30));
         entradaContrasenya.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(entradaContrasenya);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        backgroundPanel.add(entradaContrasenya);
+        backgroundPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 
 
         botoIniciSessio.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(botoIniciSessio);
+        backgroundPanel.add(botoIniciSessio);
 
-        frame.add(panel,BorderLayout.CENTER);
+        frame.add(backgroundPanel,BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -88,4 +85,18 @@ public class IniciSessioView {
 
     public void actionListenerBotoEntrar(ActionListener listener) { botoIniciSessio.addActionListener(listener);}
 
+    private class BackgroundPanel extends JPanel {
+        private Image backgroundImage;
+
+        public BackgroundPanel() {
+
+            backgroundImage = new ImageIcon("src/Assets/img.jpg").getImage();
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
 }

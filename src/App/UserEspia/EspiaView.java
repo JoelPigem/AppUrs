@@ -23,36 +23,35 @@ public class EspiaView {
         JPanel panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.setBackground(new Color(213, 21, 21));
 
-        botoCerrarSesion = new JButton("Cerrar Sesión");
+        botoCerrarSesion = new JButton("Tanca sessió");
         panelSuperior.add(botoCerrarSesion, BorderLayout.WEST); // Ubicamos el botón a la izquierda
 
         // Crear un panel central para centrar los elementos restantes
         JPanel panelCentral = new JPanel(new GridBagLayout());
         panelCentral.setBackground(new Color(213, 21, 21));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado entre componentes
-        gbc.anchor = GridBagConstraints.CENTER;  // Centramos los componentes horizontalmente
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        // Título con nombre del espía
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2; // Hacer que el título ocupe dos columnas
+        gbc.gridwidth = 2;
         JLabel labelTitol = new JLabel("Espia", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
         panelCentral.add(labelTitol, gbc);
 
-        // Ficha de usuario - Etiqueta
+
         gbc.gridy++;
-        gbc.gridwidth = 1; // Volvemos a 1 columna para el resto de componentes
-        gbc.anchor = GridBagConstraints.EAST; // Alineamos la etiqueta a la derecha
-        JLabel etiquetaFicha = new JLabel("Ficha Usuario:");
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        JLabel etiquetaFicha = new JLabel("Fitxa usuari:");
         etiquetaFicha.setForeground(Color.WHITE);
         panelCentral.add(etiquetaFicha, gbc);
 
-        // Ficha de usuario - Contenido
+
         gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST; // Alineamos el contenido a la izquierda
+        gbc.anchor = GridBagConstraints.WEST;
         fichaUsuari = new JLabel();
         fichaUsuari.setPreferredSize(new Dimension(200, 30));
         fichaUsuari.setForeground(Color.WHITE);

@@ -1,4 +1,5 @@
 package App.UserAdministrador.AfegirUser;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,22 +18,26 @@ public class AfegirUserView {
         frame.setSize(400, 250);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
-        frame.setBackground(new Color(70, 103, 144));
+
+
+        frame.getContentPane().setBackground(new Color(213, 21, 21));
 
 
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.LEFT));
         botoEnrere = new JButton("<");
+        botoEnrere.setForeground(Color.WHITE);
+        botoEnrere.setBackground(new Color(100, 15, 15));
         panelTop.add(botoEnrere);
-        panelTop.setBackground(new Color(70, 103, 144));
+        panelTop.setBackground(new Color(213, 21, 21));
 
 
         JPanel panelCentral = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
-        panelCentral.setBackground(new Color(70, 103, 144));
-
+        panelCentral.setBackground(new Color(213, 21, 21));
 
         JLabel usernameLabel = new JLabel("Nom:");
+        usernameLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -44,8 +49,8 @@ public class AfegirUserView {
         constraints.anchor = GridBagConstraints.LINE_START;
         panelCentral.add(nomField, constraints);
 
-
         JLabel passwordLabel = new JLabel("Contrassenya:");
+        passwordLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -57,8 +62,8 @@ public class AfegirUserView {
         constraints.anchor = GridBagConstraints.LINE_START;
         panelCentral.add(passwordField, constraints);
 
-
         JLabel roleLabel = new JLabel("Rol:");
+        roleLabel.setForeground(Color.WHITE);
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.anchor = GridBagConstraints.LINE_END;
@@ -73,17 +78,24 @@ public class AfegirUserView {
 
         JPanel botoPanell = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botoAfegir = new JButton("Afegir Usuari");
+        botoAfegir.setForeground(Color.WHITE);
+        botoAfegir.setBackground(new Color(100, 15, 15));
         botoPanell.add(botoAfegir);
-        botoPanell.setBackground(new Color(70, 103, 144));
+        botoPanell.setBackground(new Color(213, 21, 21));
 
 
         frame.add(panelTop, BorderLayout.NORTH);
         frame.add(panelCentral, BorderLayout.CENTER);
         frame.add(botoPanell, BorderLayout.SOUTH);
 
+
         frame.setVisible(true);
     }
-    public JButton getBotoEnrere(){return botoEnrere; }
+
+    public JButton getBotoEnrere() {
+        return botoEnrere;
+    }
+
     public String getNom() {
         return nomField.getText();
     }
