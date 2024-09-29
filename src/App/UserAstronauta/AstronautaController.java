@@ -1,8 +1,6 @@
 package App.UserAstronauta;
 
 import App.IniciSessio.AppIniciSessio;
-import App.Mecanic.MecanicController;
-import App.UserEspia.EspiaController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +9,19 @@ import java.sql.SQLException;
 public class AstronautaController {
     private AstronautaView vista;
     private AstronautaModel model;
-    private String username; // Añadir un campo para el username
+    private String username;
 
     public AstronautaController(AstronautaView vista, AstronautaModel model, String username) {
         this.vista = vista;
         this.model = model;
-        this.username = username; // Guardar el username
+        this.username = username;
 
-        String fichaUsuari = model.obtenerFichaUsuario(username); // Usar el username aquí
+        String fichaUsuari = model.obtenerFichaUsuario(username);
         vista.actualitzarFitxa(fichaUsuari);
 
         vista.actionListenerBotoEntrar(new BotonListener());
-        vista.actionListenerBotoEnviarMissatge(new BotonEnviarMissatgeListener()); // Añadimos el listener del mensaje
-        vista.actionListenerBotoCerrarSesion(new AstronautaController.BotonCerrarSesionListener()); // Listener para cerrar sesión
+        vista.actionListenerBotoEnviarMissatge(new BotonEnviarMissatgeListener());
+        vista.actionListenerBotoCerrarSesion(new AstronautaController.BotonCerrarSesionListener());
         this.vista.actionListenerFitxarEntrada(new AstronautaController.actionListenerFitxarEntrada());
         this.vista.actionListenerFitxarSortida(new AstronautaController.actionListenerFitxarSortida());
 
@@ -36,8 +34,7 @@ public class AstronautaController {
             if (command.equals("Enviar")) {
                 String coordenades = vista.getEntradaCoordenades();
                 if (model.validarCoordenades(coordenades)) {
-                    // Aquí llamamos al método para insertar coordenadas en la base de datos
-                    model.insertarCoordenades(username, coordenades); // Usamos el username
+                    model.insertarCoordenades(username, coordenades);
                     System.out.println("Coordenades enviades: " + coordenades);
                 } else {
                     System.out.println("Format de coordenades incorrecte!");
@@ -50,7 +47,6 @@ public class AstronautaController {
         public void actionPerformed(ActionEvent e) {
             String missatge = vista.getEntradaMissatge();
             if (!missatge.isEmpty()) {
-                // Aquí llamamos al método para insertar el mensaje encriptado
                 model.insertarMissatgeEncriptat(username, missatge);
                 System.out.println("Missatge enviat: " + missatge);
             } else {
@@ -60,7 +56,6 @@ public class AstronautaController {
     }
     class BotonCerrarSesionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
             vista.getFrame().dispose();
             try {
                 AppIniciSessio.main(new String[]{});
