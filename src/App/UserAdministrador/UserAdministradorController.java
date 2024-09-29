@@ -66,13 +66,7 @@ public class UserAdministradorController {
                             if (eliminado) {
                                 JOptionPane.showMessageDialog(vista.getFrame(), "Usuari eliminat correctament.");
                                 vista.clearBuscarUsuari();
-                                String rolSeleccionat = (String) vista.getDesplegableRol().getSelectedItem();
-                                try {
-                                    Object[][] usuaris = model.obtenirUsuarisPerRol(rolSeleccionat);
-                                    vista.actualitzarTaula(usuaris);
-                                } catch (SQLException ex) {
-                                    throw new RuntimeException(ex);
-                                }
+                                vista.actualitzarTaula(new Object[0][]);
                             } else {
                                 JOptionPane.showMessageDialog(vista.getFrame(), "No s'ha pogut eliminar l'usuario. Verifica l'ID.");
                             }
