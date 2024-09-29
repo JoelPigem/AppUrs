@@ -19,14 +19,12 @@ public class EspiaView {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        // Crear un panel para la parte superior, donde irá el botón de cerrar sesión
         JPanel panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.setBackground(new Color(213, 21, 21));
 
         botoCerrarSesion = new JButton("Tanca sessió");
-        panelSuperior.add(botoCerrarSesion, BorderLayout.WEST); // Ubicamos el botón a la izquierda
+        panelSuperior.add(botoCerrarSesion, BorderLayout.WEST);
 
-        // Crear un panel central para centrar los elementos restantes
         JPanel panelCentral = new JPanel(new GridBagLayout());
         panelCentral.setBackground(new Color(213, 21, 21));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -57,45 +55,39 @@ public class EspiaView {
         fichaUsuari.setForeground(Color.WHITE);
         panelCentral.add(fichaUsuari, gbc);
 
-        // Sección de envío de mensajes - Etiqueta
         gbc.gridx = 0;
         gbc.gridy++;
-        gbc.anchor = GridBagConstraints.EAST; // Etiqueta alineada a la derecha
+        gbc.anchor = GridBagConstraints.EAST;
         labelMissatge = new JLabel("Enviar Missatge:");
         labelMissatge.setForeground(Color.WHITE);
         panelCentral.add(labelMissatge, gbc);
 
-        // Sección de envío de mensajes - Entrada de texto y botón
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
 
         entradaMissatge = new JTextField();
         entradaMissatge.setPreferredSize(new Dimension(200, 30)); // Ajustar el tamaño del campo de texto
-        entradaMissatge.setColumns(20); // Añadir columnas para el tamaño horizontal
+        entradaMissatge.setColumns(20);
 
-        // Añadir campo de texto
-        gbc.fill = GridBagConstraints.HORIZONTAL; // Permitir que el JTextField se expanda horizontalmente
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         panelCentral.add(entradaMissatge, gbc);
 
-        // Añadir botón "Enviar Missatge"
         gbc.gridy++;
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         botoEnviarMissatge = new JButton("Enviar Missatge");
         panelCentral.add(botoEnviarMissatge, gbc);
 
-        // Mostrar mensaje encriptado
         gbc.gridy++;
         gbc.gridx = 0;
-        gbc.gridwidth = 2; // Hacemos que ocupe dos columnas
-        gbc.anchor = GridBagConstraints.CENTER; // Lo centramos
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         labelMensajeEncriptado = new JLabel();
         labelMensajeEncriptado.setForeground(Color.WHITE);
         panelCentral.add(labelMensajeEncriptado, gbc);
 
-        // Añadir botones de Entrada y Sortida
         JPanel panelBotonsFitxar = new JPanel();
-        panelBotonsFitxar.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Espaciado entre botones
+        panelBotonsFitxar.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         panelBotonsFitxar.setBackground(new Color(213, 21, 21));
 
         fitxarEntrada = new JButton("Entrada");
@@ -107,11 +99,10 @@ public class EspiaView {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
-        panelCentral.add(panelBotonsFitxar, gbc); // Agregar los botones al panel
+        panelCentral.add(panelBotonsFitxar, gbc);
 
-        // Añadir los paneles a la ventana principal
-        frame.add(panelSuperior, BorderLayout.NORTH); // El botón de cerrar sesión en la parte superior
-        frame.add(panelCentral, BorderLayout.CENTER); // El contenido centrado
+        frame.add(panelSuperior, BorderLayout.NORTH);
+        frame.add(panelCentral, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -119,37 +110,30 @@ public class EspiaView {
         return frame;
     }
 
-    // Método para actualizar la ficha del usuario
     public void actualitzarFitxa(String ficha) {
-        fichaUsuari.setText("<html>" + ficha.replaceAll(", ", "<br>") + "</html>"); // Mejor formato con salto de línea
+        fichaUsuari.setText("<html>" + ficha.replaceAll(", ", "<br>") + "</html>");
     }
 
-    // Obtener el mensaje introducido por el espía
     public String getEntradaMissatge() {
         return entradaMissatge.getText();
     }
 
-    // Mostrar el mensaje encriptado
     public void setMensajeEncriptado(String missatgeEncriptat) {
         labelMensajeEncriptado.setText("Mensaje Encriptado: " + missatgeEncriptat);
     }
 
-    // Listener para el botón de enviar mensaje
     public void actionListenerBotoEnviarMensatge(ActionListener listener) {
         botoEnviarMissatge.addActionListener(listener);
     }
 
-    // Listener para el botón de cerrar sesión
     public void actionListenerBotoCerrarSesion(ActionListener listener) {
         botoCerrarSesion.addActionListener(listener);
     }
 
-    // Listener para el botón de Entrada
     public void actionListenerFitxarEntrada(ActionListener listener) {
         fitxarEntrada.addActionListener(listener);
     }
 
-    // Listener para el botón de Sortida
     public void actionListenerFitxarSortida(ActionListener listener) {
         fitxarSortida.addActionListener(listener);
     }
