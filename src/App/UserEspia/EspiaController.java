@@ -1,6 +1,7 @@
 package App.UserEspia;
 
 import App.IniciSessio.*;
+import App.UserAstronauta.AstronautaController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,8 @@ public class EspiaController {
 
         vista.actionListenerBotoEnviarMensatge(new BotonEnviarMissatgeListener());
         vista.actionListenerBotoCerrarSesion(new BotonCerrarSesionListener()); // Listener para cerrar sesión
+        this.vista.actionListenerFitxarEntrada(new EspiaController.actionListenerFitxarEntrada());
+        this.vista.actionListenerFitxarSortida(new EspiaController.actionListenerFitxarSortida());
     }
 
     class BotonEnviarMissatgeListener implements ActionListener {
@@ -49,6 +52,37 @@ public class EspiaController {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+        }
+    }
+
+
+    class actionListenerFitxarEntrada implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                model.fitxarEntrada(model.obtenirID(username));
+                System.out.println("fitxat correctament");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+    }
+
+    class actionListenerFitxarSortida implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                model.fitxarSortida(model.obtenirID(username));
+                System.out.println("fitxat sortida correctament");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
     }
 }

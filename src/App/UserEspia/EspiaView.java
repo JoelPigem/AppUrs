@@ -7,27 +7,28 @@ import java.awt.event.ActionListener;
 public class EspiaView {
     private JFrame frame;
     private JButton botoEnviarMissatge, botoCerrarSesion;
+    private JButton fitxarEntrada, fitxarSortida;
     private JLabel fichaUsuari, labelMissatge, labelMensajeEncriptado;
     private JTextField entradaMissatge;
 
-    EspiaView(){
+    EspiaView() {
         frame = new JFrame("Espia");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setSize(450, 300);
+        frame.setSize(450, 400);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
         // Crear un panel para la parte superior, donde irá el botón de cerrar sesión
         JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.setBackground(new Color(70, 103, 144));
+        panelSuperior.setBackground(new Color(213, 21, 21));
 
         botoCerrarSesion = new JButton("Cerrar Sesión");
         panelSuperior.add(botoCerrarSesion, BorderLayout.WEST); // Ubicamos el botón a la izquierda
 
         // Crear un panel central para centrar los elementos restantes
         JPanel panelCentral = new JPanel(new GridBagLayout());
-        panelCentral.setBackground(new Color(70, 103, 144));
+        panelCentral.setBackground(new Color(213, 21, 21));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Espaciado entre componentes
         gbc.anchor = GridBagConstraints.CENTER;  // Centramos los componentes horizontalmente
@@ -65,24 +66,24 @@ public class EspiaView {
         labelMissatge.setForeground(Color.WHITE);
         panelCentral.add(labelMissatge, gbc);
 
-        // Sección de envío de mensajes - Entrada de texto y botón en la misma fila
+        // Sección de envío de mensajes - Entrada de texto y botón
         gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.WEST; // Alineamos la entrada a la izquierda
+        gbc.anchor = GridBagConstraints.WEST;
 
-        // Crear un panel para agrupar el campo de texto y el botón
-        JPanel panelMensajeYBoton = new JPanel();
-        panelMensajeYBoton.setBackground(new Color(70, 103, 144)); // Establecer el color de fondo igual al del panelCentral
-        panelMensajeYBoton.setLayout(new BoxLayout(panelMensajeYBoton, BoxLayout.LINE_AXIS)); // Poner los componentes en línea
+        entradaMissatge = new JTextField();
+        entradaMissatge.setPreferredSize(new Dimension(200, 30)); // Ajustar el tamaño del campo de texto
+        entradaMissatge.setColumns(20); // Añadir columnas para el tamaño horizontal
 
-        entradaMissatge = new JTextField(10);
-        entradaMissatge.setMaximumSize(new Dimension(200, 30));
-        panelMensajeYBoton.add(entradaMissatge); // Añadir el campo de texto al panel
+        // Añadir campo de texto
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Permitir que el JTextField se expanda horizontalmente
+        panelCentral.add(entradaMissatge, gbc);
 
+        // Añadir botón "Enviar Missatge"
+        gbc.gridy++;
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
         botoEnviarMissatge = new JButton("Enviar Missatge");
-        panelMensajeYBoton.add(Box.createRigidArea(new Dimension(5, 0))); // Espacio mínimo entre el campo de texto y el botón
-        panelMensajeYBoton.add(botoEnviarMissatge); // Añadir el botón al panel
-
-        panelCentral.add(panelMensajeYBoton, gbc); // Añadir el panel al layout
+        panelCentral.add(botoEnviarMissatge, gbc);
 
         // Mostrar mensaje encriptado
         gbc.gridy++;
@@ -93,6 +94,22 @@ public class EspiaView {
         labelMensajeEncriptado.setForeground(Color.WHITE);
         panelCentral.add(labelMensajeEncriptado, gbc);
 
+        // Añadir botones de Entrada y Sortida
+        JPanel panelBotonsFitxar = new JPanel();
+        panelBotonsFitxar.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20)); // Espaciado entre botones
+        panelBotonsFitxar.setBackground(new Color(213, 21, 21));
+
+        fitxarEntrada = new JButton("Entrada");
+        fitxarSortida = new JButton("Sortida");
+        panelBotonsFitxar.add(fitxarEntrada);
+        panelBotonsFitxar.add(fitxarSortida);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panelCentral.add(panelBotonsFitxar, gbc); // Agregar los botones al panel
+
         // Añadir los paneles a la ventana principal
         frame.add(panelSuperior, BorderLayout.NORTH); // El botón de cerrar sesión en la parte superior
         frame.add(panelCentral, BorderLayout.CENTER); // El contenido centrado
@@ -100,7 +117,7 @@ public class EspiaView {
     }
 
     public JFrame getFrame() {
-        return frame; // A todas las vistas porfa
+        return frame;
     }
 
     // Método para actualizar la ficha del usuario
@@ -126,5 +143,15 @@ public class EspiaView {
     // Listener para el botón de cerrar sesión
     public void actionListenerBotoCerrarSesion(ActionListener listener) {
         botoCerrarSesion.addActionListener(listener);
+    }
+
+    // Listener para el botón de Entrada
+    public void actionListenerFitxarEntrada(ActionListener listener) {
+        fitxarEntrada.addActionListener(listener);
+    }
+
+    // Listener para el botón de Sortida
+    public void actionListenerFitxarSortida(ActionListener listener) {
+        fitxarSortida.addActionListener(listener);
     }
 }

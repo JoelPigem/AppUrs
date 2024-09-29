@@ -65,4 +65,45 @@ public class EspiaModel {
     public String eliminarConsonantes(String missatge) {
         return missatge.replaceAll("[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]", ""); // Eliminar todas las consonantes
     }
+
+    public int obtenirID(String username) throws SQLException {
+
+        String sql = "select ID_USER from usuari where username = ?";
+        Connection conn = Conexio.CrearConexio();
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, username);
+
+        ResultSet rs = ps.executeQuery();
+
+        int a = 0;
+
+        while(rs.next()){
+            a = rs.getInt("ID_USER");
+        }
+
+        return a;
+    }
+
+    public void fitxarEntrada(int id) throws SQLException {
+        String sql = "update usuari set fitxar = true where id_user = ?";
+        Connection con = Conexio.CrearConexio();
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, id);
+
+        ps.executeUpdate();
+    }
+
+    public void fitxarSortida(int id) throws SQLException {
+        String sql = "update usuari set fitxar = false where id_user = ?";
+        Connection con = Conexio.CrearConexio();
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, id);
+
+        ps.executeUpdate();
+    }
 }

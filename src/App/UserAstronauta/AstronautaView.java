@@ -3,130 +3,155 @@ package App.UserAstronauta;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import App.IniciSessio.*;
 
 public class AstronautaView {
     private JFrame frame;
-    private JButton botoEnviar, botoEnviarMissatge;
-    private JTextArea fichaUsuari; // Cambiado a JTextArea
-    private JLabel labelCoordenades, labelMissatge;
+    private JButton botoEnviar, botoEnviarMissatge, botoCerrarSesion;
+    private JButton fitxarEntrada, fitxarSortida;  // Añadir los botones de Entrada y Sortida
+    private JEditorPane fichaUsuari;
+    private JLabel labelCoordenades, labelMissatge, labelTitol;
     private JTextField entradaCoordenades, entradaMissatge;
-    private IniciSessioView usuari;
 
-    AstronautaView() {
+    public AstronautaView() {
         frame = new JFrame("Astronauta");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setSize(450, 400);
+        frame.setSize(450, 450);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
-        labelCoordenades = new JLabel("Enviar Coordenades:");
-        entradaCoordenades = new JTextField(10);
-        botoEnviar = new JButton("Enviar");
+        // Crear un panel para la parte superior
+        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setBackground(new Color(70, 103, 144));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(70, 103, 144));
+        botoCerrarSesion = new JButton("Cerrar Sesión");
+        panelSuperior.add(botoCerrarSesion, BorderLayout.WEST);
 
         // Título con nombre del usuario
-        JLabel labelTitol = new JLabel("Astronauta", JLabel.CENTER);
+        labelTitol = new JLabel("Astronauta", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
-        labelTitol.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(labelTitol);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        panelSuperior.add(labelTitol, BorderLayout.CENTER);
 
-        // Sección Ficha con botones "ENT" y "SAL"
-        JPanel panelFicha = new JPanel();
-        panelFicha.setLayout(new BoxLayout(panelFicha, BoxLayout.X_AXIS));
-        panelFicha.setBackground(new Color(70, 103, 144));
+        // Crear un panel central para centrar los elementos restantes
+        JPanel panelCentral = new JPanel(new GridBagLayout());
+        panelCentral.setBackground(new Color(70, 103, 144));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
 
-        JLabel etiquetaFicha = new JLabel("Ficha");
+        // Ficha de usuario
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        JLabel etiquetaFicha = new JLabel("Ficha:");
         etiquetaFicha.setForeground(Color.WHITE);
-        panelFicha.add(etiquetaFicha);
-        panelFicha.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelCentral.add(etiquetaFicha, gbc);
 
-        // Cambiado a JTextArea para mostrar varias líneas
-        fichaUsuari = new JTextArea();
-        fichaUsuari.setEditable(false); // Deshabilitar la edición
-        fichaUsuari.setLineWrap(true); // Ajustar línea
-        fichaUsuari.setWrapStyleWord(true); // Ajustar por palabra
-        fichaUsuari.setPreferredSize(new Dimension(200, 100)); // Preferencia de tamaño
-        fichaUsuari.setBackground(new Color(70, 103, 144)); // Fondo
-        fichaUsuari.setForeground(Color.WHITE); // Color de texto
-        fichaUsuari.setFont(new Font("Arial", Font.PLAIN, 12)); // Fuente
-
-        JPanel panelFichaUsuari = new JPanel();
-        panelFichaUsuari.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alinear al centro
-        panelFichaUsuari.setBackground(new Color(70, 103, 144));
-        panelFichaUsuari.add(fichaUsuari); // Agregar JTextArea al panel centrado
-        panelFicha.add(panelFichaUsuari); // Agregar panelFichaUsuari a panelFicha
-
-        panel.add(panelFicha);
-        panel.add(Box.createRigidArea(new Dimension(0, 30)));
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        fichaUsuari = new JEditorPane();
+        fichaUsuari.setContentType("text/html");
+        fichaUsuari.setEditable(false);
+        fichaUsuari.setPreferredSize(new Dimension(200, 150));
+        fichaUsuari.setBackground(new Color(70, 103, 144));
+        fichaUsuari.setForeground(Color.WHITE);
+        fichaUsuari.setFont(new Font("Arial", Font.PLAIN, 12));
+        panelCentral.add(fichaUsuari, gbc);
 
         // Sección de envío de coordenadas
-        panel.add(labelCoordenades);
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.anchor = GridBagConstraints.EAST;
+        labelCoordenades = new JLabel("Enviar Coordenades:");
         labelCoordenades.setForeground(Color.WHITE);
-        labelCoordenades.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentral.add(labelCoordenades, gbc);
 
-        entradaCoordenades.setMaximumSize(new Dimension(200, 30));
-        entradaCoordenades.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(entradaCoordenades);
+        JPanel panelCoordenades = new JPanel();
+        panelCoordenades.setBackground(new Color(70, 103, 144));
+        panelCoordenades.setLayout(new FlowLayout(FlowLayout.LEFT));
+        entradaCoordenades = new JTextField(10);
+        panelCoordenades.add(entradaCoordenades);
+        botoEnviar = new JButton("Enviar");
+        panelCoordenades.add(botoEnviar);
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        panelCentral.add(panelCoordenades, gbc);
 
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        botoEnviar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(botoEnviar);
-
+        // Sección de envío de mensajes
+        gbc.gridx = 0;
+        gbc.gridy++;
+        gbc.anchor = GridBagConstraints.EAST;
         labelMissatge = new JLabel("Enviar Missatge Encriptat:");
         labelMissatge.setForeground(Color.WHITE);
-        labelMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(labelMissatge);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentral.add(labelMissatge, gbc);
 
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        JPanel panelMensajeYBoton = new JPanel();
+        panelMensajeYBoton.setBackground(new Color(70, 103, 144));
+        panelMensajeYBoton.setLayout(new BoxLayout(panelMensajeYBoton, BoxLayout.LINE_AXIS));
         entradaMissatge = new JTextField(10);
-        entradaMissatge.setMaximumSize(new Dimension(200, 30));
-        entradaMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(entradaMissatge);
-
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-
+        panelMensajeYBoton.add(entradaMissatge);
         botoEnviarMissatge = new JButton("Enviar Missatge");
-        botoEnviarMissatge.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(botoEnviarMissatge);
+        panelMensajeYBoton.add(Box.createRigidArea(new Dimension(5, 0)));
+        panelMensajeYBoton.add(botoEnviarMissatge);
+        panelCentral.add(panelMensajeYBoton, gbc);
 
-        frame.add(panel, BorderLayout.CENTER);
+        // Añadir botones de Entrada y Sortida
+        JPanel panelBotonsFitxar = new JPanel();
+        panelBotonsFitxar.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        panelBotonsFitxar.setBackground(new Color(70, 103, 144));
+
+        fitxarEntrada = new JButton("Entrada");
+        fitxarSortida = new JButton("Sortida");
+        panelBotonsFitxar.add(fitxarEntrada);
+        panelBotonsFitxar.add(fitxarSortida);
+
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        panelCentral.add(panelBotonsFitxar, gbc); // Agregar los botones al panel
+
+        frame.add(panelSuperior, BorderLayout.NORTH);
+        frame.add(panelCentral, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
+    // Listeners para los nuevos botones de Entrada y Sortida
+    public void actionListenerFitxarEntrada(ActionListener listener) {
+        fitxarEntrada.addActionListener(listener);
+    }
+
+    public void actionListenerFitxarSortida(ActionListener listener) {
+        fitxarSortida.addActionListener(listener);
+    }
+
+    public void actionListenerBotoCerrarSesion(ActionListener listener) {
+        botoCerrarSesion.addActionListener(listener);
+    }
+
+    public void actionListenerBotoEnviarMissatge(ActionListener listener) {
+        botoEnviarMissatge.addActionListener(listener);
+    }
+
+    public void actionListenerBotoEntrar(ActionListener listener) {
+        botoEnviar.addActionListener(listener);
+    }
+
     public JFrame getFrame() {
-        return frame; //a totes les vistes porfa
+        return frame;
     }
 
-    // Método para actualizar la ficha del usuario
     public void actualitzarFitxa(String ficha) {
-        fichaUsuari.setText(ficha);
+        String htmlFicha = "<html><span style='color:white; font-family: Arial;'>" + ficha.replace("\n", "<br>") + "</span></html>";
+        fichaUsuari.setText(htmlFicha);
     }
 
-    // Obtener las coordenadas introducidas por el usuario
     public String getEntradaCoordenades() {
         return entradaCoordenades.getText();
     }
 
     public String getEntradaMissatge() {
         return entradaMissatge.getText();
-    }
-
-    // Métodos para agregar ActionListener a los botones
-    public void actionListenerBotoEnviarMissatge(ActionListener listener) {
-        botoEnviarMissatge.addActionListener(listener);
-    }
-
-    // Métodos para agregar ActionListener a los botones
-    public void actionListenerBotoEntrar(ActionListener listener) {
-        botoEnviar.addActionListener(listener);
     }
 }

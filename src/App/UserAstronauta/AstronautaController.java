@@ -1,7 +1,12 @@
 package App.UserAstronauta;
 
+import App.IniciSessio.AppIniciSessio;
+import App.Mecanic.MecanicController;
+import App.UserEspia.EspiaController;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class AstronautaController {
     private AstronautaView vista;
@@ -18,6 +23,10 @@ public class AstronautaController {
 
         vista.actionListenerBotoEntrar(new BotonListener());
         vista.actionListenerBotoEnviarMissatge(new BotonEnviarMissatgeListener()); // Añadimos el listener del mensaje
+        vista.actionListenerBotoCerrarSesion(new AstronautaController.BotonCerrarSesionListener()); // Listener para cerrar sesión
+        this.vista.actionListenerFitxarEntrada(new AstronautaController.actionListenerFitxarEntrada());
+        this.vista.actionListenerFitxarSortida(new AstronautaController.actionListenerFitxarSortida());
+
     }
 
     class BotonListener implements ActionListener {
@@ -49,4 +58,47 @@ public class AstronautaController {
             }
         }
     }
+    class BotonCerrarSesionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Cerrar la ventana actual
+            vista.getFrame().dispose();
+            // Mostrar la ventana de inicio de sesión
+            try {
+                AppIniciSessio.main(new String[]{});
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    class actionListenerFitxarEntrada implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                model.fitxarEntrada(model.obtenirID(username));
+                System.out.println("fitxat correctament");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+    }
+
+    class actionListenerFitxarSortida implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
+                model.fitxarSortida(model.obtenirID(username));
+                System.out.println("fitxat sortida correctament");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
+    }
+
 }
