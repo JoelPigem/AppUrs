@@ -97,5 +97,38 @@ public class MecanicModel {
         return a;
     }
 
+    public String obtenerFichaUsuario(String username) {
+        Connection conn = Conexio.CrearConexio();
+        StringBuilder ficha = new StringBuilder();
+        try {
+            String query = "SELECT u.ID_USER, m.ID_MECANIC, m.NOM, m.SALARI, m.EDAT, m.NUM_TALLER, m.ADRECA, m.ANYS_EXP, m.CIUTAT, m.SEXE " +
+                    "FROM MECANIC m " +
+                    "JOIN USUARI u ON u.ID_USER = m.ID_USER " +
+                    "WHERE u.username = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                ficha.append("ID_Usuari: ").append(rs.getString("id_user")).append(", ");
+                ficha.append("ID_Mecanic: ").append(rs.getString("id_mecanic")).append(", ");
+                ficha.append("Nom: ").append(rs.getString("nom")).append(", ");
+                ficha.append("Salari: ").append(rs.getDouble("salari")).append(", ");
+                ficha.append("Edat: ").append(rs.getInt("edat")).append(", ");
+                ficha.append("NumTaller: ").append(rs.getInt("num_taller")).append(", ");
+                ficha.append("Adreça: ").append(rs.getString("adreca")).append(", ");
+                ficha.append("Any Exp: ").append(rs.getString("anys_exp")).append(", ");
+                ficha.append("Ciutat: ").append(rs.getString("ciutat")).append(", ");
+                ficha.append("Sexe: ").append(rs.getString("sexe")).append(", ");
+                // Añadir más campos según la tabla USUARI
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ficha.toString();
+    }
+
 
 }

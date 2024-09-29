@@ -1,9 +1,12 @@
 package App.Mecanic;
 
+import App.IniciSessio.AppIniciSessio;
 import App.IniciSessio.IniciSessioController;
 import App.IniciSessio.IniciSessioModel;
 import App.IniciSessio.IniciSessioView;
+import App.UserEspia.EspiaController;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -27,6 +30,10 @@ public class MecanicController {
         this.vista.actionListenerImprimir(new actionListenerImprimir());
         this.vista.actionListenerFitxarEntrada(new actionListenerFitxarEntrada());
         this.vista.actionListenerFitxarSortida(new actionListenerFitxarSortida());
+        this.vista.actionListenerBotoCerrarSesion(new BotonCerrarSesionListener());
+
+        String fichaUsuari = model.obtenerFichaUsuario(username);
+        vista.actualitzarFitxa(fichaUsuari);
 
     }
 
@@ -42,6 +49,21 @@ public class MecanicController {
             }
         }
     }
+
+    class BotonCerrarSesionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Cerrar la ventana actual
+            vista.getFrame().dispose();
+            // Mostrar la ventana de inicio de sesión
+            try {
+                AppIniciSessio.main(new String[]{});
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
     class actionListenerImprimir implements ActionListener {
 
         @Override
