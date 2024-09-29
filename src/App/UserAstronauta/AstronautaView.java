@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class AstronautaView {
     private JFrame frame;
     private JButton botoEnviar, botoEnviarMissatge, botoCerrarSesion;
-    private JButton fitxarEntrada, fitxarSortida;
+    private JButton fitxarEntrada, fitxarSortida;  // Añadir los botones de Entrada y Sortida
     private JEditorPane fichaUsuari;
     private JLabel labelCoordenades, labelMissatge, labelTitol;
     private JTextField entradaCoordenades, entradaMissatge;
@@ -20,22 +20,26 @@ public class AstronautaView {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
 
+        // Crear un panel para la parte superior
         JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.setBackground(new Color(213, 21, 21));
+        panelSuperior.setBackground(new Color(70, 103, 144));
 
-        botoCerrarSesion = new JButton("Tancar Sessió");
+        botoCerrarSesion = new JButton("Cerrar Sesión");
         panelSuperior.add(botoCerrarSesion, BorderLayout.WEST);
 
+        // Título con nombre del usuario
         labelTitol = new JLabel("Astronauta", JLabel.CENTER);
         labelTitol.setForeground(Color.WHITE);
         labelTitol.setFont(new Font("Arial", Font.BOLD, 18));
         panelSuperior.add(labelTitol, BorderLayout.CENTER);
 
+        // Crear un panel central para centrar los elementos restantes
         JPanel panelCentral = new JPanel(new GridBagLayout());
-        panelCentral.setBackground(new Color(213, 21, 21));
+        panelCentral.setBackground(new Color(70, 103, 144));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
+        // Ficha de usuario
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -49,11 +53,12 @@ public class AstronautaView {
         fichaUsuari.setContentType("text/html");
         fichaUsuari.setEditable(false);
         fichaUsuari.setPreferredSize(new Dimension(200, 150));
-        fichaUsuari.setBackground(new Color(213, 21, 21));
+        fichaUsuari.setBackground(new Color(70, 103, 144));
         fichaUsuari.setForeground(Color.WHITE);
         fichaUsuari.setFont(new Font("Arial", Font.PLAIN, 12));
         panelCentral.add(fichaUsuari, gbc);
 
+        // Sección de envío de coordenadas
         gbc.gridx = 0;
         gbc.gridy++;
         gbc.anchor = GridBagConstraints.EAST;
@@ -62,7 +67,7 @@ public class AstronautaView {
         panelCentral.add(labelCoordenades, gbc);
 
         JPanel panelCoordenades = new JPanel();
-        panelCoordenades.setBackground(new Color(213, 21, 21));
+        panelCoordenades.setBackground(new Color(70, 103, 144));
         panelCoordenades.setLayout(new FlowLayout(FlowLayout.LEFT));
         entradaCoordenades = new JTextField(10);
         panelCoordenades.add(entradaCoordenades);
@@ -72,6 +77,7 @@ public class AstronautaView {
         gbc.anchor = GridBagConstraints.WEST;
         panelCentral.add(panelCoordenades, gbc);
 
+        // Sección de envío de mensajes
         gbc.gridx = 0;
         gbc.gridy++;
         gbc.anchor = GridBagConstraints.EAST;
@@ -82,7 +88,7 @@ public class AstronautaView {
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
         JPanel panelMensajeYBoton = new JPanel();
-        panelMensajeYBoton.setBackground(new Color(213, 21, 21));
+        panelMensajeYBoton.setBackground(new Color(70, 103, 144));
         panelMensajeYBoton.setLayout(new BoxLayout(panelMensajeYBoton, BoxLayout.LINE_AXIS));
         entradaMissatge = new JTextField(10);
         panelMensajeYBoton.add(entradaMissatge);
@@ -91,9 +97,10 @@ public class AstronautaView {
         panelMensajeYBoton.add(botoEnviarMissatge);
         panelCentral.add(panelMensajeYBoton, gbc);
 
+        // Añadir botones de Entrada y Sortida
         JPanel panelBotonsFitxar = new JPanel();
         panelBotonsFitxar.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
-        panelBotonsFitxar.setBackground(new Color(213, 21, 21));
+        panelBotonsFitxar.setBackground(new Color(70, 103, 144));
 
         fitxarEntrada = new JButton("Entrada");
         fitxarSortida = new JButton("Sortida");
@@ -103,13 +110,14 @@ public class AstronautaView {
         gbc.gridy++;
         gbc.gridx = 0;
         gbc.gridwidth = 2;
-        panelCentral.add(panelBotonsFitxar, gbc);
+        panelCentral.add(panelBotonsFitxar, gbc); // Agregar los botones al panel
 
         frame.add(panelSuperior, BorderLayout.NORTH);
         frame.add(panelCentral, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
+    // Listeners para los nuevos botones de Entrada y Sortida
     public void actionListenerFitxarEntrada(ActionListener listener) {
         fitxarEntrada.addActionListener(listener);
     }

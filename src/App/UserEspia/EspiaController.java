@@ -1,6 +1,7 @@
 package App.UserEspia;
 
 import App.IniciSessio.*;
+import App.UserAstronauta.AstronautaController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,11 +18,12 @@ public class EspiaController {
         this.model = model;
         this.username = username;
 
-        String fichaUsuari = model.obtenirFitxaUsuari(username);
+        // Actualizar la ficha del usuario
+        String fichaUsuari = model.obtenerFichaUsuario(username);
         vista.actualitzarFitxa(fichaUsuari);
 
         vista.actionListenerBotoEnviarMensatge(new BotonEnviarMissatgeListener());
-        vista.actionListenerBotoCerrarSesion(new BotonCerrarSesionListener());
+        vista.actionListenerBotoCerrarSesion(new BotonCerrarSesionListener()); // Listener para cerrar sesión
         this.vista.actionListenerFitxarEntrada(new EspiaController.actionListenerFitxarEntrada());
         this.vista.actionListenerFitxarSortida(new EspiaController.actionListenerFitxarSortida());
     }
@@ -31,17 +33,20 @@ public class EspiaController {
             String missatge = vista.getEntradaMissatge();
             if (!missatge.isEmpty()) {
                 model.insertarMissatgeEncriptat(username, missatge);
-                String mensajeEncriptado = model.eliminarConsonants(missatge);
+                String mensajeEncriptado = model.eliminarConsonantes(missatge);
                 vista.setMensajeEncriptado(mensajeEncriptado);
             } else {
-                JOptionPane.showMessageDialog(vista.getFrame(), "El missatge no pot estar buit.");
+                JOptionPane.showMessageDialog(vista.getFrame(), "El mensaje no puede estar vacío.");
             }
         }
     }
 
+    // Listener para el botón de cerrar sesión
     class BotonCerrarSesionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            // Cerrar la ventana actual
             vista.getFrame().dispose();
+            // Mostrar la ventana de inicio de sesión
             try {
                 AppIniciSessio.main(new String[]{});
             } catch (SQLException ex) {

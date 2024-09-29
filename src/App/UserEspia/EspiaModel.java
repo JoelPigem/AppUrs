@@ -10,7 +10,8 @@ public class EspiaModel {
         conn = Conexio.CrearConexio();
     }
 
-    public String obtenirFitxaUsuari(String username) {
+    // Método para obtener la ficha del Espía desde la base de datos
+    public String obtenerFichaUsuario(String username) {
         StringBuilder ficha = new StringBuilder();
         try {
             String query = "SELECT NOM_CLAU, TELF" +
@@ -22,6 +23,7 @@ public class EspiaModel {
             if (rs.next()) {
                 ficha.append("Nom clau: ").append(rs.getString("nom_clau")).append(", ");
                 ficha.append("Teléfon: ").append(rs.getString("telf")).append(", ");
+                // Añadir más campos según la tabla USUARI
             }
             rs.close();
             stmt.close();
@@ -31,9 +33,11 @@ public class EspiaModel {
         return ficha.toString();
     }
 
+    // Método para insertar el mensaje encriptado en la base de datos
     public void insertarMissatgeEncriptat(String username, String missatge) {
-        String missatgeEncriptat = eliminarConsonants(missatge);
+        String missatgeEncriptat = eliminarConsonantes(missatge);
         try {
+            // Obtener ID_USER del username
             String queryId = "SELECT ID_USER FROM USUARI WHERE username = ?";
             PreparedStatement stmtId = conn.prepareStatement(queryId);
             stmtId.setString(1, username);
@@ -42,6 +46,7 @@ public class EspiaModel {
             if (rsId.next()) {
                 int idEspia = rsId.getInt("ID_USER");
 
+                // Insertar mensaje en la tabla MISSATGES_ENCRIPTATS
                 String insertQuery = "INSERT INTO msg_encr_espies (ID_ESPIA, MISSATGE_ENCRIPTAT, DATA_ENVIAMENT) VALUES (?, ?, NOW())";
                 PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
                 insertStmt.setInt(1, idEspia);
@@ -56,8 +61,9 @@ public class EspiaModel {
         }
     }
 
-    public String eliminarConsonants(String missatge) {
-        return missatge.replaceAll("[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]", "");
+    // Método para eliminar las consonantes de un mensaje
+    public String eliminarConsonantes(String missatge) {
+        return missatge.replaceAll("[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]", ""); // Eliminar todas las consonantes
     }
 
     public int obtenirID(String username) throws SQLException {
